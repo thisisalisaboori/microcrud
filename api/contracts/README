@@ -1,0 +1,6 @@
+pip install protobuf grpcio grpcio-tools
+
+python3 -m grpc_tools.protoc -I../../protocols/ --python_out=. --pyi_out=. --grpc_python_out=. ../../protocols/microcrud.proto
+
+
+
