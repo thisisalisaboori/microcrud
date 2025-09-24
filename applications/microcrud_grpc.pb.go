@@ -4,11 +4,15 @@
 // - protoc             v3.21.12
 // source: microcrud.proto
 
-package contracts
+package main
 
 import (
 	context "context"
+
 	grpc "google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
+
 	//codes "google.golang.org/grpc/codes"
 	//status "google.golang.org/grpc/status"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
@@ -99,7 +103,7 @@ func (c *crudEntityClient) GetData(ctx context.Context, in *emptypb.Empty, opts 
 // CrudEntityServer is the server API for CrudEntity service.
 // All implementations must embed UnimplementedCrudEntityServer
 // for forward compatibility.
-type CrudEntityServer interface {
+type ICrudEntityServer interface {
 	Create(context.Context, *EntityProtocol) (*ResultService, error)
 	Update(context.Context, *EntityProtocol) (*ResultService, error)
 	Delete(context.Context, *DeleteProtocol) (*ResultService, error)
@@ -113,26 +117,26 @@ type CrudEntityServer interface {
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedCrudEntityServer struct{}
+type MyCrudEntityServer struct{}
 
-// func (UnimplementedCrudEntityServer) Create(context.Context, *EntityProtocol) (*ResultService, error) {
-	
-// 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
-// }
-// func (UnimplementedCrudEntityServer) Update(context.Context, *EntityProtocol) (*ResultService, error) {
-// 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
-// }
-// func (UnimplementedCrudEntityServer) Delete(context.Context, *DeleteProtocol) (*ResultService, error) {
-// 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
-// }
-// func (UnimplementedCrudEntityServer) GetById(context.Context, *GetProtocol) (*ResultService, error) {
-// 	return nil, status.Errorf(codes.Unimplemented, "method GetById not implemented")
-// }
-// func (UnimplementedCrudEntityServer) GetData(context.Context, *emptypb.Empty) (*ResultService, error) {
-// 	return nil, status.Errorf(codes.Unimplemented, "method GetData not implemented")
-// }
-// func (UnimplementedCrudEntityServer) mustEmbedUnimplementedCrudEntityServer() {}
-// func (UnimplementedCrudEntityServer) testEmbeddedByValue()                    {}
+func (MyCrudEntityServer) Create(context.Context, *EntityProtocol) (*ResultService, error) {
+
+	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (MyCrudEntityServer) Update(context.Context, *EntityProtocol) (*ResultService, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (MyCrudEntityServer) Delete(context.Context, *DeleteProtocol) (*ResultService, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (MyCrudEntityServer) GetById(context.Context, *GetProtocol) (*ResultService, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetById not implemented")
+}
+func (MyCrudEntityServer) GetData(context.Context, *emptypb.Empty) (*ResultService, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetData not implemented")
+}
+func (MyCrudEntityServer) mustEmbedUnimplementedCrudEntityServer() {}
+func (MyCrudEntityServer) testEmbeddedByValue()                    {}
 
 // UnsafeCrudEntityServer may be embedded to opt out of forward compatibility for this service.
 // Use of this interface is not recommended, as added methods to CrudEntityServer will
@@ -141,7 +145,7 @@ type UnsafeCrudEntityServer interface {
 	mustEmbedUnimplementedCrudEntityServer()
 }
 
-func RegisterCrudEntityServer(s grpc.ServiceRegistrar, srv CrudEntityServer) {
+func RegisterCrudEntityServer(s grpc.ServiceRegistrar, srv ICrudEntityServer) {
 	// If the following call pancis, it indicates UnimplementedCrudEntityServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
@@ -158,14 +162,14 @@ func _CrudEntity_Create_Handler(srv interface{}, ctx context.Context, dec func(i
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CrudEntityServer).Create(ctx, in)
+		return srv.(ICrudEntityServer).Create(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
 		FullMethod: CrudEntity_Create_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CrudEntityServer).Create(ctx, req.(*EntityProtocol))
+		return srv.(ICrudEntityServer).Create(ctx, req.(*EntityProtocol))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -176,14 +180,14 @@ func _CrudEntity_Update_Handler(srv interface{}, ctx context.Context, dec func(i
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CrudEntityServer).Update(ctx, in)
+		return srv.(ICrudEntityServer).Update(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
 		FullMethod: CrudEntity_Update_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CrudEntityServer).Update(ctx, req.(*EntityProtocol))
+		return srv.(ICrudEntityServer).Update(ctx, req.(*EntityProtocol))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -194,14 +198,14 @@ func _CrudEntity_Delete_Handler(srv interface{}, ctx context.Context, dec func(i
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CrudEntityServer).Delete(ctx, in)
+		return srv.(ICrudEntityServer).Delete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
 		FullMethod: CrudEntity_Delete_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CrudEntityServer).Delete(ctx, req.(*DeleteProtocol))
+		return srv.(ICrudEntityServer).Delete(ctx, req.(*DeleteProtocol))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -212,14 +216,14 @@ func _CrudEntity_GetById_Handler(srv interface{}, ctx context.Context, dec func(
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CrudEntityServer).GetById(ctx, in)
+		return srv.(ICrudEntityServer).GetById(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
 		FullMethod: CrudEntity_GetById_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CrudEntityServer).GetById(ctx, req.(*GetProtocol))
+		return srv.(ICrudEntityServer).GetById(ctx, req.(*GetProtocol))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -230,14 +234,14 @@ func _CrudEntity_GetData_Handler(srv interface{}, ctx context.Context, dec func(
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CrudEntityServer).GetData(ctx, in)
+		return srv.(ICrudEntityServer).GetData(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
 		FullMethod: CrudEntity_GetData_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CrudEntityServer).GetData(ctx, req.(*emptypb.Empty))
+		return srv.(ICrudEntityServer).GetData(ctx, req.(*emptypb.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -247,7 +251,7 @@ func _CrudEntity_GetData_Handler(srv interface{}, ctx context.Context, dec func(
 // and not to be introspected or modified (even as a copy)
 var CrudEntity_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "microcrud.CrudEntity",
-	HandlerType: (*CrudEntityServer)(nil),
+	HandlerType: (*ICrudEntityServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "Create",
