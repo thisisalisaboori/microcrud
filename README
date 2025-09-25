@@ -1,0 +1,5 @@
+option go_package = "api/proto/microcrudproto;microcrudproto";
+uvicorn rest:app --host 0.0.0.0 --port 8080
+python3 -m grpc_tools.protoc -I./api/proto  --python_out=api/endpoint/proto --pyi_out=api/endpoint/proto/  --grpc_python_out=.  api/proto//crud.proto
+ export PATH="$PATH:$(go env GOPATH)/bin"
+protoc  --go_out=.  --go-grpc_out=.   api/proto/crud.proto

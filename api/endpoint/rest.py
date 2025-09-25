@@ -27,7 +27,7 @@ stub = crud_pb2_grpc.CrudServiceStub(channel)
 @app.get("/{entity}/{id}")
 def getbyid(id:str , entity:str):
     
-    entity = crud_pb2.GetItemRequest(id=id ,entity=entity)
+    entity = crud_pb2.GetItemRequest(id=id ,entity=entity,Bucket= "ali")
     response = stub.GetItemById(entity)
     print(response.data)
     return {"Ok":response.ok , "data": response.data}  
@@ -37,7 +37,7 @@ def create(entity:str, js:CrudBaseMode):
     data_struct = struct_pb2.Struct()
     data_struct.update(js.data)
     print(data_struct)
-    data= crud_pb2.CreateItemRequest(entity= entity,data= data_struct)
+    data= crud_pb2.CreateItemRequest(entity= entity,data= data_struct,Bucket= "ali")
     response= stub.CreateItem(data)
     
     return {"Ok":response.ok} 
@@ -48,7 +48,7 @@ def update(entity:str, id:str,js:CrudBaseMode):
     print(js)
     data_struct = struct_pb2.Struct()
     data_struct.update(js.data)
-    data= crud_pb2.UpdateItemRequest(id= id,entity= entity,data= data_struct)
+    data= crud_pb2.UpdateItemRequest(id= id,entity= entity,data= data_struct,Bucket= "ali")
     response= stub.UpdateItem(data)
     return {"Ok":response.ok} 
 
@@ -62,7 +62,7 @@ def delete(entity:str, id:str):
 @app.get("/{entity}/")
 async def getItems(entity:str,pageindex:int,pagesize:int):
     print(pageindex ,pagesize)
-    data= crud_pb2.GetItemsRequest(entity=entity , pageIndex=pageindex ,pageSize= pagesize)
+    data= crud_pb2.GetItemsRequest(entity=entity , pageIndex=pageindex ,pageSize= pagesize,Bucket= "ali")
     response= stub.GetItems(data)
     ls=[]
     for row in response.data:

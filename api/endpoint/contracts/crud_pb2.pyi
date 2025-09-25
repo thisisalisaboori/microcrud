@@ -13,6 +13,16 @@ class BaseResponse(_message.Message):
     ok: bool
     def __init__(self, ok: bool = ...) -> None: ...
 
+class InitRequst(_message.Message):
+    __slots__ = ("Bucket", "Collection", "CreateIndex")
+    BUCKET_FIELD_NUMBER: _ClassVar[int]
+    COLLECTION_FIELD_NUMBER: _ClassVar[int]
+    CREATEINDEX_FIELD_NUMBER: _ClassVar[int]
+    Bucket: str
+    Collection: str
+    CreateIndex: bool
+    def __init__(self, Bucket: _Optional[str] = ..., Collection: _Optional[str] = ..., CreateIndex: bool = ...) -> None: ...
+
 class GetByIdResponse(_message.Message):
     __slots__ = ("ok", "data")
     OK_FIELD_NUMBER: _ClassVar[int]
@@ -30,45 +40,55 @@ class GetItemsResponse(_message.Message):
     def __init__(self, ok: bool = ..., data: _Optional[_Iterable[_Union[GetByIdResponse, _Mapping]]] = ...) -> None: ...
 
 class CreateItemRequest(_message.Message):
-    __slots__ = ("entity", "data")
+    __slots__ = ("Bucket", "entity", "data")
+    BUCKET_FIELD_NUMBER: _ClassVar[int]
     ENTITY_FIELD_NUMBER: _ClassVar[int]
     DATA_FIELD_NUMBER: _ClassVar[int]
+    Bucket: str
     entity: str
     data: _struct_pb2.Struct
-    def __init__(self, entity: _Optional[str] = ..., data: _Optional[_Union[_struct_pb2.Struct, _Mapping]] = ...) -> None: ...
+    def __init__(self, Bucket: _Optional[str] = ..., entity: _Optional[str] = ..., data: _Optional[_Union[_struct_pb2.Struct, _Mapping]] = ...) -> None: ...
 
 class UpdateItemRequest(_message.Message):
-    __slots__ = ("id", "entity", "data")
+    __slots__ = ("Bucket", "id", "entity", "data")
+    BUCKET_FIELD_NUMBER: _ClassVar[int]
     ID_FIELD_NUMBER: _ClassVar[int]
     ENTITY_FIELD_NUMBER: _ClassVar[int]
     DATA_FIELD_NUMBER: _ClassVar[int]
+    Bucket: str
     id: str
     entity: str
     data: _struct_pb2.Struct
-    def __init__(self, id: _Optional[str] = ..., entity: _Optional[str] = ..., data: _Optional[_Union[_struct_pb2.Struct, _Mapping]] = ...) -> None: ...
+    def __init__(self, Bucket: _Optional[str] = ..., id: _Optional[str] = ..., entity: _Optional[str] = ..., data: _Optional[_Union[_struct_pb2.Struct, _Mapping]] = ...) -> None: ...
 
 class DeleteItemRequest(_message.Message):
-    __slots__ = ("id", "entity")
+    __slots__ = ("Bucket", "id", "entity")
+    BUCKET_FIELD_NUMBER: _ClassVar[int]
     ID_FIELD_NUMBER: _ClassVar[int]
     ENTITY_FIELD_NUMBER: _ClassVar[int]
+    Bucket: str
     id: str
     entity: str
-    def __init__(self, id: _Optional[str] = ..., entity: _Optional[str] = ...) -> None: ...
+    def __init__(self, Bucket: _Optional[str] = ..., id: _Optional[str] = ..., entity: _Optional[str] = ...) -> None: ...
 
 class GetItemRequest(_message.Message):
-    __slots__ = ("id", "entity")
+    __slots__ = ("Bucket", "id", "entity")
+    BUCKET_FIELD_NUMBER: _ClassVar[int]
     ID_FIELD_NUMBER: _ClassVar[int]
     ENTITY_FIELD_NUMBER: _ClassVar[int]
+    Bucket: str
     id: str
     entity: str
-    def __init__(self, id: _Optional[str] = ..., entity: _Optional[str] = ...) -> None: ...
+    def __init__(self, Bucket: _Optional[str] = ..., id: _Optional[str] = ..., entity: _Optional[str] = ...) -> None: ...
 
 class GetItemsRequest(_message.Message):
-    __slots__ = ("entity", "pageIndex", "pageSize")
+    __slots__ = ("Bucket", "entity", "pageIndex", "pageSize")
+    BUCKET_FIELD_NUMBER: _ClassVar[int]
     ENTITY_FIELD_NUMBER: _ClassVar[int]
     PAGEINDEX_FIELD_NUMBER: _ClassVar[int]
     PAGESIZE_FIELD_NUMBER: _ClassVar[int]
+    Bucket: str
     entity: str
     pageIndex: int
     pageSize: int
-    def __init__(self, entity: _Optional[str] = ..., pageIndex: _Optional[int] = ..., pageSize: _Optional[int] = ...) -> None: ...
+    def __init__(self, Bucket: _Optional[str] = ..., entity: _Optional[str] = ..., pageIndex: _Optional[int] = ..., pageSize: _Optional[int] = ...) -> None: ...

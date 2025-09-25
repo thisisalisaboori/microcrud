@@ -23,11 +23,20 @@ func main(){
     }
     defer conn.Close()
 
+
+
+
     client := pb.NewCrudServiceClient(conn)
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second*5)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*15)
     defer cancel()
+	
+	
+	client.Init(ctx, &pb.InitRequst{Bucket: "b" , Collection: "person" , CreateIndex: true})
+	
+	//return 
 	res, err := client.CreateItem(ctx, &pb.CreateItemRequest{
-        Entity: "mycollection",
+        Entity: "person",
+		Bucket: "b",
 		Data : &structpb.Struct{ Fields: map[string]*structpb.Value {"name" :structpb.NewStringValue("elahe"),
 		 "lastname" :structpb.NewStringValue("saboori"), "age": structpb.NewNumberValue(38) } },
     })
@@ -37,7 +46,7 @@ func main(){
 
 	//x,_:=client.GetItemById(ctx, &pb.GetItemRequest{Id: "90f57f37-0354-4fae-a3d2-3e5efc494573" , Entity: "newcol"})
 	
-	x,_:=client.GetItems(ctx, &pb.GetItemsRequest{Entity: "mycollection" , PageSize: 10 ,PageIndex: 1  })
+	x,_:=client.GetItems(ctx, &pb.GetItemsRequest{Entity: "person" , PageSize: 10 ,PageIndex: 1 ,Bucket: "b"  })
 	fmt.Println(x.Data)
 
 	for _,data:= range(x.Data){
@@ -47,7 +56,8 @@ func main(){
 		//id:= string(js["id"], )  
 		//client.DeleteItem(ctx, &pb.DeleteItemRequest{ Id: id  , Entity: "mycollection" })
 		_, _ = client.UpdateItem(ctx, &pb.UpdateItemRequest{
-        Entity: "mycollection",
+        Entity: "person",
+		Bucket: "b",
 		Id: id,
 		Data : &structpb.Struct{ Fields: map[string]*structpb.Value {"name" :structpb.NewStringValue("ali"),
 		 "lastname" :structpb.NewStringValue("saboori"), "age": structpb.NewNumberValue(39),"city":structpb.NewStringValue("tehran") } },

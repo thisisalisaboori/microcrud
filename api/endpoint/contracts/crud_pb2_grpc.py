@@ -59,6 +59,11 @@ class CrudServiceStub(object):
                 request_serializer=crud__pb2.GetItemsRequest.SerializeToString,
                 response_deserializer=crud__pb2.GetItemsResponse.FromString,
                 _registered_method=True)
+        self.Init = channel.unary_unary(
+                '/microcrud.CrudService/Init',
+                request_serializer=crud__pb2.InitRequst.SerializeToString,
+                response_deserializer=crud__pb2.BaseResponse.FromString,
+                _registered_method=True)
 
 
 class CrudServiceServicer(object):
@@ -94,6 +99,12 @@ class CrudServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def Init(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_CrudServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -121,6 +132,11 @@ def add_CrudServiceServicer_to_server(servicer, server):
                     servicer.GetItems,
                     request_deserializer=crud__pb2.GetItemsRequest.FromString,
                     response_serializer=crud__pb2.GetItemsResponse.SerializeToString,
+            ),
+            'Init': grpc.unary_unary_rpc_method_handler(
+                    servicer.Init,
+                    request_deserializer=crud__pb2.InitRequst.FromString,
+                    response_serializer=crud__pb2.BaseResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -258,6 +274,33 @@ class CrudService(object):
             '/microcrud.CrudService/GetItems',
             crud__pb2.GetItemsRequest.SerializeToString,
             crud__pb2.GetItemsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def Init(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/microcrud.CrudService/Init',
+            crud__pb2.InitRequst.SerializeToString,
+            crud__pb2.BaseResponse.FromString,
             options,
             channel_credentials,
             insecure,

@@ -25,7 +25,7 @@ _sym_db = _symbol_database.Default()
 from google.protobuf import struct_pb2 as google_dot_protobuf_dot_struct__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\ncrud.proto\x12\tmicrocrud\x1a\x1cgoogle/protobuf/struct.proto\"\x1a\n\x0c\x42\x61seResponse\x12\n\n\x02ok\x18\x01 \x01(\x08\"D\n\x0fGetByIdResponse\x12\n\n\x02ok\x18\x01 \x01(\x08\x12%\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x17.google.protobuf.Struct\"H\n\x10GetItemsResponse\x12\n\n\x02ok\x18\x01 \x01(\x08\x12(\n\x04\x64\x61ta\x18\x02 \x03(\x0b\x32\x1a.microcrud.GetByIdResponse\"J\n\x11\x43reateItemRequest\x12\x0e\n\x06\x65ntity\x18\x01 \x01(\t\x12%\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x17.google.protobuf.Struct\"V\n\x11UpdateItemRequest\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0e\n\x06\x65ntity\x18\x02 \x01(\t\x12%\n\x04\x64\x61ta\x18\x03 \x01(\x0b\x32\x17.google.protobuf.Struct\"/\n\x11\x44\x65leteItemRequest\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0e\n\x06\x65ntity\x18\x02 \x01(\t\",\n\x0eGetItemRequest\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0e\n\x06\x65ntity\x18\x02 \x01(\t\"F\n\x0fGetItemsRequest\x12\x0e\n\x06\x65ntity\x18\x01 \x01(\t\x12\x11\n\tpageIndex\x18\x02 \x01(\x05\x12\x10\n\x08pageSize\x18\x03 \x01(\x05\x32\xe7\x02\n\x0b\x43rudService\x12\x43\n\nCreateItem\x12\x1c.microcrud.CreateItemRequest\x1a\x17.microcrud.BaseResponse\x12\x43\n\nUpdateItem\x12\x1c.microcrud.UpdateItemRequest\x1a\x17.microcrud.BaseResponse\x12\x43\n\nDeleteItem\x12\x1c.microcrud.DeleteItemRequest\x1a\x17.microcrud.BaseResponse\x12\x44\n\x0bGetItemById\x12\x19.microcrud.GetItemRequest\x1a\x1a.microcrud.GetByIdResponse\x12\x43\n\x08GetItems\x12\x1a.microcrud.GetItemsRequest\x1a\x1b.microcrud.GetItemsResponseB)Z\'api/proto/microcrudproto;microcrudprotob\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\ncrud.proto\x12\tmicrocrud\x1a\x1cgoogle/protobuf/struct.proto\"\x1a\n\x0c\x42\x61seResponse\x12\n\n\x02ok\x18\x01 \x01(\x08\"E\n\nInitRequst\x12\x0e\n\x06\x42ucket\x18\x01 \x01(\t\x12\x12\n\nCollection\x18\x02 \x01(\t\x12\x13\n\x0b\x43reateIndex\x18\x03 \x01(\x08\"D\n\x0fGetByIdResponse\x12\n\n\x02ok\x18\x01 \x01(\x08\x12%\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x17.google.protobuf.Struct\"H\n\x10GetItemsResponse\x12\n\n\x02ok\x18\x01 \x01(\x08\x12(\n\x04\x64\x61ta\x18\x02 \x03(\x0b\x32\x1a.microcrud.GetByIdResponse\"Z\n\x11\x43reateItemRequest\x12\x0e\n\x06\x42ucket\x18\x01 \x01(\t\x12\x0e\n\x06\x65ntity\x18\x02 \x01(\t\x12%\n\x04\x64\x61ta\x18\x03 \x01(\x0b\x32\x17.google.protobuf.Struct\"f\n\x11UpdateItemRequest\x12\x0e\n\x06\x42ucket\x18\x01 \x01(\t\x12\n\n\x02id\x18\x02 \x01(\t\x12\x0e\n\x06\x65ntity\x18\x03 \x01(\t\x12%\n\x04\x64\x61ta\x18\x04 \x01(\x0b\x32\x17.google.protobuf.Struct\"?\n\x11\x44\x65leteItemRequest\x12\x0e\n\x06\x42ucket\x18\x01 \x01(\t\x12\n\n\x02id\x18\x02 \x01(\t\x12\x0e\n\x06\x65ntity\x18\x03 \x01(\t\"<\n\x0eGetItemRequest\x12\x0e\n\x06\x42ucket\x18\x01 \x01(\t\x12\n\n\x02id\x18\x02 \x01(\t\x12\x0e\n\x06\x65ntity\x18\x03 \x01(\t\"V\n\x0fGetItemsRequest\x12\x0e\n\x06\x42ucket\x18\x01 \x01(\t\x12\x0e\n\x06\x65ntity\x18\x02 \x01(\t\x12\x11\n\tpageIndex\x18\x03 \x01(\x05\x12\x10\n\x08pageSize\x18\x04 \x01(\x05\x32\x9f\x03\n\x0b\x43rudService\x12\x43\n\nCreateItem\x12\x1c.microcrud.CreateItemRequest\x1a\x17.microcrud.BaseResponse\x12\x43\n\nUpdateItem\x12\x1c.microcrud.UpdateItemRequest\x1a\x17.microcrud.BaseResponse\x12\x43\n\nDeleteItem\x12\x1c.microcrud.DeleteItemRequest\x1a\x17.microcrud.BaseResponse\x12\x44\n\x0bGetItemById\x12\x19.microcrud.GetItemRequest\x1a\x1a.microcrud.GetByIdResponse\x12\x43\n\x08GetItems\x12\x1a.microcrud.GetItemsRequest\x1a\x1b.microcrud.GetItemsResponse\x12\x36\n\x04Init\x12\x15.microcrud.InitRequst\x1a\x17.microcrud.BaseResponseB)Z\'api/proto/microcrudproto;microcrudprotob\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -35,20 +35,22 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._serialized_options = b'Z\'api/proto/microcrudproto;microcrudproto'
   _globals['_BASERESPONSE']._serialized_start=55
   _globals['_BASERESPONSE']._serialized_end=81
-  _globals['_GETBYIDRESPONSE']._serialized_start=83
-  _globals['_GETBYIDRESPONSE']._serialized_end=151
-  _globals['_GETITEMSRESPONSE']._serialized_start=153
-  _globals['_GETITEMSRESPONSE']._serialized_end=225
-  _globals['_CREATEITEMREQUEST']._serialized_start=227
-  _globals['_CREATEITEMREQUEST']._serialized_end=301
-  _globals['_UPDATEITEMREQUEST']._serialized_start=303
-  _globals['_UPDATEITEMREQUEST']._serialized_end=389
-  _globals['_DELETEITEMREQUEST']._serialized_start=391
-  _globals['_DELETEITEMREQUEST']._serialized_end=438
-  _globals['_GETITEMREQUEST']._serialized_start=440
-  _globals['_GETITEMREQUEST']._serialized_end=484
-  _globals['_GETITEMSREQUEST']._serialized_start=486
-  _globals['_GETITEMSREQUEST']._serialized_end=556
-  _globals['_CRUDSERVICE']._serialized_start=559
-  _globals['_CRUDSERVICE']._serialized_end=918
+  _globals['_INITREQUST']._serialized_start=83
+  _globals['_INITREQUST']._serialized_end=152
+  _globals['_GETBYIDRESPONSE']._serialized_start=154
+  _globals['_GETBYIDRESPONSE']._serialized_end=222
+  _globals['_GETITEMSRESPONSE']._serialized_start=224
+  _globals['_GETITEMSRESPONSE']._serialized_end=296
+  _globals['_CREATEITEMREQUEST']._serialized_start=298
+  _globals['_CREATEITEMREQUEST']._serialized_end=388
+  _globals['_UPDATEITEMREQUEST']._serialized_start=390
+  _globals['_UPDATEITEMREQUEST']._serialized_end=492
+  _globals['_DELETEITEMREQUEST']._serialized_start=494
+  _globals['_DELETEITEMREQUEST']._serialized_end=557
+  _globals['_GETITEMREQUEST']._serialized_start=559
+  _globals['_GETITEMREQUEST']._serialized_end=619
+  _globals['_GETITEMSREQUEST']._serialized_start=621
+  _globals['_GETITEMSREQUEST']._serialized_end=707
+  _globals['_CRUDSERVICE']._serialized_start=710
+  _globals['_CRUDSERVICE']._serialized_end=1125
 # @@protoc_insertion_point(module_scope)

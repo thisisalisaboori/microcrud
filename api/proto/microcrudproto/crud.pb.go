@@ -66,6 +66,66 @@ func (x *BaseResponse) GetOk() bool {
 	return false
 }
 
+type InitRequst struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Bucket        string                 `protobuf:"bytes,1,opt,name=Bucket,proto3" json:"Bucket,omitempty"`
+	Collection    string                 `protobuf:"bytes,2,opt,name=Collection,proto3" json:"Collection,omitempty"`
+	CreateIndex   bool                   `protobuf:"varint,3,opt,name=CreateIndex,proto3" json:"CreateIndex,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *InitRequst) Reset() {
+	*x = InitRequst{}
+	mi := &file_api_proto_crud_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InitRequst) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InitRequst) ProtoMessage() {}
+
+func (x *InitRequst) ProtoReflect() protoreflect.Message {
+	mi := &file_api_proto_crud_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InitRequst.ProtoReflect.Descriptor instead.
+func (*InitRequst) Descriptor() ([]byte, []int) {
+	return file_api_proto_crud_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *InitRequst) GetBucket() string {
+	if x != nil {
+		return x.Bucket
+	}
+	return ""
+}
+
+func (x *InitRequst) GetCollection() string {
+	if x != nil {
+		return x.Collection
+	}
+	return ""
+}
+
+func (x *InitRequst) GetCreateIndex() bool {
+	if x != nil {
+		return x.CreateIndex
+	}
+	return false
+}
+
 type GetByIdResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ok            bool                   `protobuf:"varint,1,opt,name=ok,proto3" json:"ok,omitempty"`
@@ -76,7 +136,7 @@ type GetByIdResponse struct {
 
 func (x *GetByIdResponse) Reset() {
 	*x = GetByIdResponse{}
-	mi := &file_api_proto_crud_proto_msgTypes[1]
+	mi := &file_api_proto_crud_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -88,7 +148,7 @@ func (x *GetByIdResponse) String() string {
 func (*GetByIdResponse) ProtoMessage() {}
 
 func (x *GetByIdResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_crud_proto_msgTypes[1]
+	mi := &file_api_proto_crud_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -101,7 +161,7 @@ func (x *GetByIdResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetByIdResponse.ProtoReflect.Descriptor instead.
 func (*GetByIdResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_crud_proto_rawDescGZIP(), []int{1}
+	return file_api_proto_crud_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *GetByIdResponse) GetOk() bool {
@@ -128,7 +188,7 @@ type GetItemsResponse struct {
 
 func (x *GetItemsResponse) Reset() {
 	*x = GetItemsResponse{}
-	mi := &file_api_proto_crud_proto_msgTypes[2]
+	mi := &file_api_proto_crud_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -140,7 +200,7 @@ func (x *GetItemsResponse) String() string {
 func (*GetItemsResponse) ProtoMessage() {}
 
 func (x *GetItemsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_crud_proto_msgTypes[2]
+	mi := &file_api_proto_crud_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -153,7 +213,7 @@ func (x *GetItemsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetItemsResponse.ProtoReflect.Descriptor instead.
 func (*GetItemsResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_crud_proto_rawDescGZIP(), []int{2}
+	return file_api_proto_crud_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *GetItemsResponse) GetOk() bool {
@@ -172,15 +232,16 @@ func (x *GetItemsResponse) GetData() []*GetByIdResponse {
 
 type CreateItemRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Entity        string                 `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Data          *structpb.Struct       `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+	Bucket        string                 `protobuf:"bytes,1,opt,name=Bucket,proto3" json:"Bucket,omitempty"`
+	Entity        string                 `protobuf:"bytes,2,opt,name=entity,proto3" json:"entity,omitempty"`
+	Data          *structpb.Struct       `protobuf:"bytes,3,opt,name=data,proto3" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreateItemRequest) Reset() {
 	*x = CreateItemRequest{}
-	mi := &file_api_proto_crud_proto_msgTypes[3]
+	mi := &file_api_proto_crud_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -192,7 +253,7 @@ func (x *CreateItemRequest) String() string {
 func (*CreateItemRequest) ProtoMessage() {}
 
 func (x *CreateItemRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_crud_proto_msgTypes[3]
+	mi := &file_api_proto_crud_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -205,7 +266,14 @@ func (x *CreateItemRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateItemRequest.ProtoReflect.Descriptor instead.
 func (*CreateItemRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_crud_proto_rawDescGZIP(), []int{3}
+	return file_api_proto_crud_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *CreateItemRequest) GetBucket() string {
+	if x != nil {
+		return x.Bucket
+	}
+	return ""
 }
 
 func (x *CreateItemRequest) GetEntity() string {
@@ -224,16 +292,17 @@ func (x *CreateItemRequest) GetData() *structpb.Struct {
 
 type UpdateItemRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Entity        string                 `protobuf:"bytes,2,opt,name=entity,proto3" json:"entity,omitempty"`
-	Data          *structpb.Struct       `protobuf:"bytes,3,opt,name=data,proto3" json:"data,omitempty"`
+	Bucket        string                 `protobuf:"bytes,1,opt,name=Bucket,proto3" json:"Bucket,omitempty"`
+	Id            string                 `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
+	Entity        string                 `protobuf:"bytes,3,opt,name=entity,proto3" json:"entity,omitempty"`
+	Data          *structpb.Struct       `protobuf:"bytes,4,opt,name=data,proto3" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdateItemRequest) Reset() {
 	*x = UpdateItemRequest{}
-	mi := &file_api_proto_crud_proto_msgTypes[4]
+	mi := &file_api_proto_crud_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -245,7 +314,7 @@ func (x *UpdateItemRequest) String() string {
 func (*UpdateItemRequest) ProtoMessage() {}
 
 func (x *UpdateItemRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_crud_proto_msgTypes[4]
+	mi := &file_api_proto_crud_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -258,7 +327,14 @@ func (x *UpdateItemRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateItemRequest.ProtoReflect.Descriptor instead.
 func (*UpdateItemRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_crud_proto_rawDescGZIP(), []int{4}
+	return file_api_proto_crud_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *UpdateItemRequest) GetBucket() string {
+	if x != nil {
+		return x.Bucket
+	}
+	return ""
 }
 
 func (x *UpdateItemRequest) GetId() string {
@@ -284,15 +360,16 @@ func (x *UpdateItemRequest) GetData() *structpb.Struct {
 
 type DeleteItemRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Entity        string                 `protobuf:"bytes,2,opt,name=entity,proto3" json:"entity,omitempty"`
+	Bucket        string                 `protobuf:"bytes,1,opt,name=Bucket,proto3" json:"Bucket,omitempty"`
+	Id            string                 `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
+	Entity        string                 `protobuf:"bytes,3,opt,name=entity,proto3" json:"entity,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *DeleteItemRequest) Reset() {
 	*x = DeleteItemRequest{}
-	mi := &file_api_proto_crud_proto_msgTypes[5]
+	mi := &file_api_proto_crud_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -304,7 +381,7 @@ func (x *DeleteItemRequest) String() string {
 func (*DeleteItemRequest) ProtoMessage() {}
 
 func (x *DeleteItemRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_crud_proto_msgTypes[5]
+	mi := &file_api_proto_crud_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -317,7 +394,14 @@ func (x *DeleteItemRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteItemRequest.ProtoReflect.Descriptor instead.
 func (*DeleteItemRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_crud_proto_rawDescGZIP(), []int{5}
+	return file_api_proto_crud_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *DeleteItemRequest) GetBucket() string {
+	if x != nil {
+		return x.Bucket
+	}
+	return ""
 }
 
 func (x *DeleteItemRequest) GetId() string {
@@ -336,15 +420,16 @@ func (x *DeleteItemRequest) GetEntity() string {
 
 type GetItemRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Entity        string                 `protobuf:"bytes,2,opt,name=entity,proto3" json:"entity,omitempty"`
+	Bucket        string                 `protobuf:"bytes,1,opt,name=Bucket,proto3" json:"Bucket,omitempty"`
+	Id            string                 `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
+	Entity        string                 `protobuf:"bytes,3,opt,name=entity,proto3" json:"entity,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetItemRequest) Reset() {
 	*x = GetItemRequest{}
-	mi := &file_api_proto_crud_proto_msgTypes[6]
+	mi := &file_api_proto_crud_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -356,7 +441,7 @@ func (x *GetItemRequest) String() string {
 func (*GetItemRequest) ProtoMessage() {}
 
 func (x *GetItemRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_crud_proto_msgTypes[6]
+	mi := &file_api_proto_crud_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -369,7 +454,14 @@ func (x *GetItemRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetItemRequest.ProtoReflect.Descriptor instead.
 func (*GetItemRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_crud_proto_rawDescGZIP(), []int{6}
+	return file_api_proto_crud_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *GetItemRequest) GetBucket() string {
+	if x != nil {
+		return x.Bucket
+	}
+	return ""
 }
 
 func (x *GetItemRequest) GetId() string {
@@ -388,16 +480,17 @@ func (x *GetItemRequest) GetEntity() string {
 
 type GetItemsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Entity        string                 `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	PageIndex     int32                  `protobuf:"varint,2,opt,name=pageIndex,proto3" json:"pageIndex,omitempty"`
-	PageSize      int32                  `protobuf:"varint,3,opt,name=pageSize,proto3" json:"pageSize,omitempty"`
+	Bucket        string                 `protobuf:"bytes,1,opt,name=Bucket,proto3" json:"Bucket,omitempty"`
+	Entity        string                 `protobuf:"bytes,2,opt,name=entity,proto3" json:"entity,omitempty"`
+	PageIndex     int32                  `protobuf:"varint,3,opt,name=pageIndex,proto3" json:"pageIndex,omitempty"`
+	PageSize      int32                  `protobuf:"varint,4,opt,name=pageSize,proto3" json:"pageSize,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetItemsRequest) Reset() {
 	*x = GetItemsRequest{}
-	mi := &file_api_proto_crud_proto_msgTypes[7]
+	mi := &file_api_proto_crud_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -409,7 +502,7 @@ func (x *GetItemsRequest) String() string {
 func (*GetItemsRequest) ProtoMessage() {}
 
 func (x *GetItemsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_crud_proto_msgTypes[7]
+	mi := &file_api_proto_crud_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -422,7 +515,14 @@ func (x *GetItemsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetItemsRequest.ProtoReflect.Descriptor instead.
 func (*GetItemsRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_crud_proto_rawDescGZIP(), []int{7}
+	return file_api_proto_crud_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *GetItemsRequest) GetBucket() string {
+	if x != nil {
+		return x.Bucket
+	}
+	return ""
 }
 
 func (x *GetItemsRequest) GetEntity() string {
@@ -452,30 +552,42 @@ const file_api_proto_crud_proto_rawDesc = "" +
 	"\n" +
 	"\x14api/proto/crud.proto\x12\tmicrocrud\x1a\x1cgoogle/protobuf/struct.proto\"\x1e\n" +
 	"\fBaseResponse\x12\x0e\n" +
-	"\x02ok\x18\x01 \x01(\bR\x02ok\"N\n" +
+	"\x02ok\x18\x01 \x01(\bR\x02ok\"f\n" +
+	"\n" +
+	"InitRequst\x12\x16\n" +
+	"\x06Bucket\x18\x01 \x01(\tR\x06Bucket\x12\x1e\n" +
+	"\n" +
+	"Collection\x18\x02 \x01(\tR\n" +
+	"Collection\x12 \n" +
+	"\vCreateIndex\x18\x03 \x01(\bR\vCreateIndex\"N\n" +
 	"\x0fGetByIdResponse\x12\x0e\n" +
 	"\x02ok\x18\x01 \x01(\bR\x02ok\x12+\n" +
 	"\x04data\x18\x02 \x01(\v2\x17.google.protobuf.StructR\x04data\"R\n" +
 	"\x10GetItemsResponse\x12\x0e\n" +
 	"\x02ok\x18\x01 \x01(\bR\x02ok\x12.\n" +
-	"\x04data\x18\x02 \x03(\v2\x1a.microcrud.GetByIdResponseR\x04data\"X\n" +
+	"\x04data\x18\x02 \x03(\v2\x1a.microcrud.GetByIdResponseR\x04data\"p\n" +
 	"\x11CreateItemRequest\x12\x16\n" +
-	"\x06entity\x18\x01 \x01(\tR\x06entity\x12+\n" +
-	"\x04data\x18\x02 \x01(\v2\x17.google.protobuf.StructR\x04data\"h\n" +
-	"\x11UpdateItemRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
+	"\x06Bucket\x18\x01 \x01(\tR\x06Bucket\x12\x16\n" +
 	"\x06entity\x18\x02 \x01(\tR\x06entity\x12+\n" +
-	"\x04data\x18\x03 \x01(\v2\x17.google.protobuf.StructR\x04data\";\n" +
-	"\x11DeleteItemRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
-	"\x06entity\x18\x02 \x01(\tR\x06entity\"8\n" +
-	"\x0eGetItemRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
-	"\x06entity\x18\x02 \x01(\tR\x06entity\"c\n" +
+	"\x04data\x18\x03 \x01(\v2\x17.google.protobuf.StructR\x04data\"\x80\x01\n" +
+	"\x11UpdateItemRequest\x12\x16\n" +
+	"\x06Bucket\x18\x01 \x01(\tR\x06Bucket\x12\x0e\n" +
+	"\x02id\x18\x02 \x01(\tR\x02id\x12\x16\n" +
+	"\x06entity\x18\x03 \x01(\tR\x06entity\x12+\n" +
+	"\x04data\x18\x04 \x01(\v2\x17.google.protobuf.StructR\x04data\"S\n" +
+	"\x11DeleteItemRequest\x12\x16\n" +
+	"\x06Bucket\x18\x01 \x01(\tR\x06Bucket\x12\x0e\n" +
+	"\x02id\x18\x02 \x01(\tR\x02id\x12\x16\n" +
+	"\x06entity\x18\x03 \x01(\tR\x06entity\"P\n" +
+	"\x0eGetItemRequest\x12\x16\n" +
+	"\x06Bucket\x18\x01 \x01(\tR\x06Bucket\x12\x0e\n" +
+	"\x02id\x18\x02 \x01(\tR\x02id\x12\x16\n" +
+	"\x06entity\x18\x03 \x01(\tR\x06entity\"{\n" +
 	"\x0fGetItemsRequest\x12\x16\n" +
-	"\x06entity\x18\x01 \x01(\tR\x06entity\x12\x1c\n" +
-	"\tpageIndex\x18\x02 \x01(\x05R\tpageIndex\x12\x1a\n" +
-	"\bpageSize\x18\x03 \x01(\x05R\bpageSize2\xe7\x02\n" +
+	"\x06Bucket\x18\x01 \x01(\tR\x06Bucket\x12\x16\n" +
+	"\x06entity\x18\x02 \x01(\tR\x06entity\x12\x1c\n" +
+	"\tpageIndex\x18\x03 \x01(\x05R\tpageIndex\x12\x1a\n" +
+	"\bpageSize\x18\x04 \x01(\x05R\bpageSize2\x9f\x03\n" +
 	"\vCrudService\x12C\n" +
 	"\n" +
 	"CreateItem\x12\x1c.microcrud.CreateItemRequest\x1a\x17.microcrud.BaseResponse\x12C\n" +
@@ -484,7 +596,8 @@ const file_api_proto_crud_proto_rawDesc = "" +
 	"\n" +
 	"DeleteItem\x12\x1c.microcrud.DeleteItemRequest\x1a\x17.microcrud.BaseResponse\x12D\n" +
 	"\vGetItemById\x12\x19.microcrud.GetItemRequest\x1a\x1a.microcrud.GetByIdResponse\x12C\n" +
-	"\bGetItems\x12\x1a.microcrud.GetItemsRequest\x1a\x1b.microcrud.GetItemsResponseB)Z'api/proto/microcrudproto;microcrudprotob\x06proto3"
+	"\bGetItems\x12\x1a.microcrud.GetItemsRequest\x1a\x1b.microcrud.GetItemsResponse\x126\n" +
+	"\x04Init\x12\x15.microcrud.InitRequst\x1a\x17.microcrud.BaseResponseB)Z'api/proto/microcrudproto;microcrudprotob\x06proto3"
 
 var (
 	file_api_proto_crud_proto_rawDescOnce sync.Once
@@ -498,38 +611,41 @@ func file_api_proto_crud_proto_rawDescGZIP() []byte {
 	return file_api_proto_crud_proto_rawDescData
 }
 
-var file_api_proto_crud_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_api_proto_crud_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_api_proto_crud_proto_goTypes = []any{
 	(*BaseResponse)(nil),      // 0: microcrud.BaseResponse
-	(*GetByIdResponse)(nil),   // 1: microcrud.GetByIdResponse
-	(*GetItemsResponse)(nil),  // 2: microcrud.GetItemsResponse
-	(*CreateItemRequest)(nil), // 3: microcrud.CreateItemRequest
-	(*UpdateItemRequest)(nil), // 4: microcrud.UpdateItemRequest
-	(*DeleteItemRequest)(nil), // 5: microcrud.DeleteItemRequest
-	(*GetItemRequest)(nil),    // 6: microcrud.GetItemRequest
-	(*GetItemsRequest)(nil),   // 7: microcrud.GetItemsRequest
-	(*structpb.Struct)(nil),   // 8: google.protobuf.Struct
+	(*InitRequst)(nil),        // 1: microcrud.InitRequst
+	(*GetByIdResponse)(nil),   // 2: microcrud.GetByIdResponse
+	(*GetItemsResponse)(nil),  // 3: microcrud.GetItemsResponse
+	(*CreateItemRequest)(nil), // 4: microcrud.CreateItemRequest
+	(*UpdateItemRequest)(nil), // 5: microcrud.UpdateItemRequest
+	(*DeleteItemRequest)(nil), // 6: microcrud.DeleteItemRequest
+	(*GetItemRequest)(nil),    // 7: microcrud.GetItemRequest
+	(*GetItemsRequest)(nil),   // 8: microcrud.GetItemsRequest
+	(*structpb.Struct)(nil),   // 9: google.protobuf.Struct
 }
 var file_api_proto_crud_proto_depIdxs = []int32{
-	8, // 0: microcrud.GetByIdResponse.data:type_name -> google.protobuf.Struct
-	1, // 1: microcrud.GetItemsResponse.data:type_name -> microcrud.GetByIdResponse
-	8, // 2: microcrud.CreateItemRequest.data:type_name -> google.protobuf.Struct
-	8, // 3: microcrud.UpdateItemRequest.data:type_name -> google.protobuf.Struct
-	3, // 4: microcrud.CrudService.CreateItem:input_type -> microcrud.CreateItemRequest
-	4, // 5: microcrud.CrudService.UpdateItem:input_type -> microcrud.UpdateItemRequest
-	5, // 6: microcrud.CrudService.DeleteItem:input_type -> microcrud.DeleteItemRequest
-	6, // 7: microcrud.CrudService.GetItemById:input_type -> microcrud.GetItemRequest
-	7, // 8: microcrud.CrudService.GetItems:input_type -> microcrud.GetItemsRequest
-	0, // 9: microcrud.CrudService.CreateItem:output_type -> microcrud.BaseResponse
-	0, // 10: microcrud.CrudService.UpdateItem:output_type -> microcrud.BaseResponse
-	0, // 11: microcrud.CrudService.DeleteItem:output_type -> microcrud.BaseResponse
-	1, // 12: microcrud.CrudService.GetItemById:output_type -> microcrud.GetByIdResponse
-	2, // 13: microcrud.CrudService.GetItems:output_type -> microcrud.GetItemsResponse
-	9, // [9:14] is the sub-list for method output_type
-	4, // [4:9] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	9,  // 0: microcrud.GetByIdResponse.data:type_name -> google.protobuf.Struct
+	2,  // 1: microcrud.GetItemsResponse.data:type_name -> microcrud.GetByIdResponse
+	9,  // 2: microcrud.CreateItemRequest.data:type_name -> google.protobuf.Struct
+	9,  // 3: microcrud.UpdateItemRequest.data:type_name -> google.protobuf.Struct
+	4,  // 4: microcrud.CrudService.CreateItem:input_type -> microcrud.CreateItemRequest
+	5,  // 5: microcrud.CrudService.UpdateItem:input_type -> microcrud.UpdateItemRequest
+	6,  // 6: microcrud.CrudService.DeleteItem:input_type -> microcrud.DeleteItemRequest
+	7,  // 7: microcrud.CrudService.GetItemById:input_type -> microcrud.GetItemRequest
+	8,  // 8: microcrud.CrudService.GetItems:input_type -> microcrud.GetItemsRequest
+	1,  // 9: microcrud.CrudService.Init:input_type -> microcrud.InitRequst
+	0,  // 10: microcrud.CrudService.CreateItem:output_type -> microcrud.BaseResponse
+	0,  // 11: microcrud.CrudService.UpdateItem:output_type -> microcrud.BaseResponse
+	0,  // 12: microcrud.CrudService.DeleteItem:output_type -> microcrud.BaseResponse
+	2,  // 13: microcrud.CrudService.GetItemById:output_type -> microcrud.GetByIdResponse
+	3,  // 14: microcrud.CrudService.GetItems:output_type -> microcrud.GetItemsResponse
+	0,  // 15: microcrud.CrudService.Init:output_type -> microcrud.BaseResponse
+	10, // [10:16] is the sub-list for method output_type
+	4,  // [4:10] is the sub-list for method input_type
+	4,  // [4:4] is the sub-list for extension type_name
+	4,  // [4:4] is the sub-list for extension extendee
+	0,  // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_api_proto_crud_proto_init() }
@@ -543,7 +659,7 @@ func file_api_proto_crud_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_proto_crud_proto_rawDesc), len(file_api_proto_crud_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

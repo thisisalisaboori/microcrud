@@ -24,6 +24,7 @@ const (
 	CrudService_DeleteItem_FullMethodName  = "/microcrud.CrudService/DeleteItem"
 	CrudService_GetItemById_FullMethodName = "/microcrud.CrudService/GetItemById"
 	CrudService_GetItems_FullMethodName    = "/microcrud.CrudService/GetItems"
+	CrudService_Init_FullMethodName        = "/microcrud.CrudService/Init"
 )
 
 // CrudServiceClient is the client API for CrudService service.
@@ -35,6 +36,7 @@ type CrudServiceClient interface {
 	DeleteItem(ctx context.Context, in *DeleteItemRequest, opts ...grpc.CallOption) (*BaseResponse, error)
 	GetItemById(ctx context.Context, in *GetItemRequest, opts ...grpc.CallOption) (*GetByIdResponse, error)
 	GetItems(ctx context.Context, in *GetItemsRequest, opts ...grpc.CallOption) (*GetItemsResponse, error)
+	Init(ctx context.Context, in *InitRequst, opts ...grpc.CallOption) (*BaseResponse, error)
 }
 
 type crudServiceClient struct {
@@ -95,6 +97,16 @@ func (c *crudServiceClient) GetItems(ctx context.Context, in *GetItemsRequest, o
 	return out, nil
 }
 
+func (c *crudServiceClient) Init(ctx context.Context, in *InitRequst, opts ...grpc.CallOption) (*BaseResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BaseResponse)
+	err := c.cc.Invoke(ctx, CrudService_Init_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CrudServiceServer is the server API for CrudService service.
 // All implementations must embed UnimplementedCrudServiceServer
 // for forward compatibility.
@@ -104,6 +116,7 @@ type CrudServiceServer interface {
 	DeleteItem(context.Context, *DeleteItemRequest) (*BaseResponse, error)
 	GetItemById(context.Context, *GetItemRequest) (*GetByIdResponse, error)
 	GetItems(context.Context, *GetItemsRequest) (*GetItemsResponse, error)
+	Init(context.Context, *InitRequst) (*BaseResponse, error)
 	mustEmbedUnimplementedCrudServiceServer()
 }
 
@@ -128,6 +141,9 @@ func (UnimplementedCrudServiceServer) GetItemById(context.Context, *GetItemReque
 }
 func (UnimplementedCrudServiceServer) GetItems(context.Context, *GetItemsRequest) (*GetItemsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetItems not implemented")
+}
+func (UnimplementedCrudServiceServer) Init(context.Context, *InitRequst) (*BaseResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Init not implemented")
 }
 func (UnimplementedCrudServiceServer) mustEmbedUnimplementedCrudServiceServer() {}
 func (UnimplementedCrudServiceServer) testEmbeddedByValue()                     {}
@@ -240,6 +256,24 @@ func _CrudService_GetItems_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CrudService_Init_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InitRequst)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CrudServiceServer).Init(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CrudService_Init_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CrudServiceServer).Init(ctx, req.(*InitRequst))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // CrudService_ServiceDesc is the grpc.ServiceDesc for CrudService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -266,6 +300,10 @@ var CrudService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetItems",
 			Handler:    _CrudService_GetItems_Handler,
+		},
+		{
+			MethodName: "Init",
+			Handler:    _CrudService_Init_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

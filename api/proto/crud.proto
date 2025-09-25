@@ -14,11 +14,19 @@ service CrudService{
     rpc DeleteItem(DeleteItemRequest) returns (BaseResponse);
     rpc GetItemById(GetItemRequest) returns (GetByIdResponse);
     rpc GetItems(GetItemsRequest) returns (GetItemsResponse) ;
+    rpc Init(InitRequst) returns (BaseResponse);
 }
 
 
 message BaseResponse{
     bool ok =1;
+}
+
+message InitRequst{
+
+    string Bucket =1;
+    string Collection =2;
+    bool CreateIndex=3;
 }
 
 message GetByIdResponse{
@@ -33,28 +41,33 @@ message GetItemsResponse{
 
 
 message CreateItemRequest{
-    string entity =1;
-    google.protobuf.Struct data=2;
-}
-
-message UpdateItemRequest{
-    string id=1;
+    string Bucket =1;
     string entity =2;
     google.protobuf.Struct data=3;
 }
 
+message UpdateItemRequest{
+    string Bucket =1;
+    string id=2;
+    string entity =3;
+    google.protobuf.Struct data=4;
+}
+
 message DeleteItemRequest{
-    string id=1;
-    string entity =2;
+     string Bucket =1;
+    string id=2;
+    string entity =3;
 }
 
 message GetItemRequest{
-    string id=1;
-    string entity =2;
+     string Bucket =1;
+    string id=2;
+    string entity =3;
 }
 
 message GetItemsRequest{
-    string entity =1;
-    int32 pageIndex=2;
-    int32 pageSize=3;
+     string Bucket =1;
+    string entity =2;
+    int32 pageIndex=3;
+    int32 pageSize=4;
 }
