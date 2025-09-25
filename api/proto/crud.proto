@@ -1,0 +1,60 @@
+syntax= "proto3";
+
+import "google/protobuf/struct.proto";
+
+
+package microcrud;
+option go_package = "api/proto/microcrudproto;microcrudproto";
+
+
+
+service CrudService{
+    rpc CreateItem(CreateItemRequest) returns (BaseResponse);
+    rpc UpdateItem(UpdateItemRequest) returns (BaseResponse);
+    rpc DeleteItem(DeleteItemRequest) returns (BaseResponse);
+    rpc GetItemById(GetItemRequest) returns (GetByIdResponse);
+    rpc GetItems(GetItemsRequest) returns (GetItemsResponse) ;
+}
+
+
+message BaseResponse{
+    bool ok =1;
+}
+
+message GetByIdResponse{
+    bool ok =1;
+    google.protobuf.Struct data=2;
+}
+
+message GetItemsResponse{
+    bool ok =1;
+    repeated GetByIdResponse data=2;
+}
+
+
+message CreateItemRequest{
+    string entity =1;
+    google.protobuf.Struct data=2;
+}
+
+message UpdateItemRequest{
+    string id=1;
+    string entity =2;
+    google.protobuf.Struct data=3;
+}
+
+message DeleteItemRequest{
+    string id=1;
+    string entity =2;
+}
+
+message GetItemRequest{
+    string id=1;
+    string entity =2;
+}
+
+message GetItemsRequest{
+    string entity =1;
+    int32 pageIndex=2;
+    int32 pageSize=3;
+}

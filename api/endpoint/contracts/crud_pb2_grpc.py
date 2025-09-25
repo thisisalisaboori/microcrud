@@ -3,8 +3,7 @@
 import grpc
 import warnings
 
-from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
-import microcrud_pb2 as microcrud__pb2
+import crud_pb2 as crud__pb2
 
 GRPC_GENERATED_VERSION = '1.74.0'
 GRPC_VERSION = grpc.__version__
@@ -19,14 +18,14 @@ except ImportError:
 if _version_not_supported:
     raise RuntimeError(
         f'The grpc package installed is at version {GRPC_VERSION},'
-        + f' but the generated code in microcrud_pb2_grpc.py depends on'
+        + f' but the generated code in crud_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
     )
 
 
-class CrudEntityStub(object):
+class CrudServiceStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -35,107 +34,107 @@ class CrudEntityStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.Create = channel.unary_unary(
-                '/microcrud.CrudEntity/Create',
-                request_serializer=microcrud__pb2.EntityProtocol.SerializeToString,
-                response_deserializer=microcrud__pb2.ResultService.FromString,
+        self.CreateItem = channel.unary_unary(
+                '/microcrud.CrudService/CreateItem',
+                request_serializer=crud__pb2.CreateItemRequest.SerializeToString,
+                response_deserializer=crud__pb2.BaseResponse.FromString,
                 _registered_method=True)
-        self.Update = channel.unary_unary(
-                '/microcrud.CrudEntity/Update',
-                request_serializer=microcrud__pb2.EntityProtocol.SerializeToString,
-                response_deserializer=microcrud__pb2.ResultService.FromString,
+        self.UpdateItem = channel.unary_unary(
+                '/microcrud.CrudService/UpdateItem',
+                request_serializer=crud__pb2.UpdateItemRequest.SerializeToString,
+                response_deserializer=crud__pb2.BaseResponse.FromString,
                 _registered_method=True)
-        self.Delete = channel.unary_unary(
-                '/microcrud.CrudEntity/Delete',
-                request_serializer=microcrud__pb2.DeleteProtocol.SerializeToString,
-                response_deserializer=microcrud__pb2.ResultService.FromString,
+        self.DeleteItem = channel.unary_unary(
+                '/microcrud.CrudService/DeleteItem',
+                request_serializer=crud__pb2.DeleteItemRequest.SerializeToString,
+                response_deserializer=crud__pb2.BaseResponse.FromString,
                 _registered_method=True)
-        self.GetById = channel.unary_unary(
-                '/microcrud.CrudEntity/GetById',
-                request_serializer=microcrud__pb2.GetProtocol.SerializeToString,
-                response_deserializer=microcrud__pb2.ResultService.FromString,
+        self.GetItemById = channel.unary_unary(
+                '/microcrud.CrudService/GetItemById',
+                request_serializer=crud__pb2.GetItemRequest.SerializeToString,
+                response_deserializer=crud__pb2.GetByIdResponse.FromString,
                 _registered_method=True)
-        self.GetData = channel.unary_unary(
-                '/microcrud.CrudEntity/GetData',
-                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-                response_deserializer=microcrud__pb2.ResultService.FromString,
+        self.GetItems = channel.unary_unary(
+                '/microcrud.CrudService/GetItems',
+                request_serializer=crud__pb2.GetItemsRequest.SerializeToString,
+                response_deserializer=crud__pb2.GetItemsResponse.FromString,
                 _registered_method=True)
 
 
-class CrudEntityServicer(object):
+class CrudServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def Create(self, request, context):
+    def CreateItem(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def Update(self, request, context):
+    def UpdateItem(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def Delete(self, request, context):
+    def DeleteItem(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetById(self, request, context):
+    def GetItemById(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetData(self, request, context):
+    def GetItems(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
 
-def add_CrudEntityServicer_to_server(servicer, server):
+def add_CrudServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'Create': grpc.unary_unary_rpc_method_handler(
-                    servicer.Create,
-                    request_deserializer=microcrud__pb2.EntityProtocol.FromString,
-                    response_serializer=microcrud__pb2.ResultService.SerializeToString,
+            'CreateItem': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateItem,
+                    request_deserializer=crud__pb2.CreateItemRequest.FromString,
+                    response_serializer=crud__pb2.BaseResponse.SerializeToString,
             ),
-            'Update': grpc.unary_unary_rpc_method_handler(
-                    servicer.Update,
-                    request_deserializer=microcrud__pb2.EntityProtocol.FromString,
-                    response_serializer=microcrud__pb2.ResultService.SerializeToString,
+            'UpdateItem': grpc.unary_unary_rpc_method_handler(
+                    servicer.UpdateItem,
+                    request_deserializer=crud__pb2.UpdateItemRequest.FromString,
+                    response_serializer=crud__pb2.BaseResponse.SerializeToString,
             ),
-            'Delete': grpc.unary_unary_rpc_method_handler(
-                    servicer.Delete,
-                    request_deserializer=microcrud__pb2.DeleteProtocol.FromString,
-                    response_serializer=microcrud__pb2.ResultService.SerializeToString,
+            'DeleteItem': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteItem,
+                    request_deserializer=crud__pb2.DeleteItemRequest.FromString,
+                    response_serializer=crud__pb2.BaseResponse.SerializeToString,
             ),
-            'GetById': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetById,
-                    request_deserializer=microcrud__pb2.GetProtocol.FromString,
-                    response_serializer=microcrud__pb2.ResultService.SerializeToString,
+            'GetItemById': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetItemById,
+                    request_deserializer=crud__pb2.GetItemRequest.FromString,
+                    response_serializer=crud__pb2.GetByIdResponse.SerializeToString,
             ),
-            'GetData': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetData,
-                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                    response_serializer=microcrud__pb2.ResultService.SerializeToString,
+            'GetItems': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetItems,
+                    request_deserializer=crud__pb2.GetItemsRequest.FromString,
+                    response_serializer=crud__pb2.GetItemsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'microcrud.CrudEntity', rpc_method_handlers)
+            'microcrud.CrudService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('microcrud.CrudEntity', rpc_method_handlers)
+    server.add_registered_method_handlers('microcrud.CrudService', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
-class CrudEntity(object):
+class CrudService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def Create(request,
+    def CreateItem(request,
             target,
             options=(),
             channel_credentials=None,
@@ -148,9 +147,9 @@ class CrudEntity(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/microcrud.CrudEntity/Create',
-            microcrud__pb2.EntityProtocol.SerializeToString,
-            microcrud__pb2.ResultService.FromString,
+            '/microcrud.CrudService/CreateItem',
+            crud__pb2.CreateItemRequest.SerializeToString,
+            crud__pb2.BaseResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -162,7 +161,7 @@ class CrudEntity(object):
             _registered_method=True)
 
     @staticmethod
-    def Update(request,
+    def UpdateItem(request,
             target,
             options=(),
             channel_credentials=None,
@@ -175,9 +174,9 @@ class CrudEntity(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/microcrud.CrudEntity/Update',
-            microcrud__pb2.EntityProtocol.SerializeToString,
-            microcrud__pb2.ResultService.FromString,
+            '/microcrud.CrudService/UpdateItem',
+            crud__pb2.UpdateItemRequest.SerializeToString,
+            crud__pb2.BaseResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -189,7 +188,7 @@ class CrudEntity(object):
             _registered_method=True)
 
     @staticmethod
-    def Delete(request,
+    def DeleteItem(request,
             target,
             options=(),
             channel_credentials=None,
@@ -202,9 +201,9 @@ class CrudEntity(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/microcrud.CrudEntity/Delete',
-            microcrud__pb2.DeleteProtocol.SerializeToString,
-            microcrud__pb2.ResultService.FromString,
+            '/microcrud.CrudService/DeleteItem',
+            crud__pb2.DeleteItemRequest.SerializeToString,
+            crud__pb2.BaseResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -216,7 +215,7 @@ class CrudEntity(object):
             _registered_method=True)
 
     @staticmethod
-    def GetById(request,
+    def GetItemById(request,
             target,
             options=(),
             channel_credentials=None,
@@ -229,9 +228,9 @@ class CrudEntity(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/microcrud.CrudEntity/GetById',
-            microcrud__pb2.GetProtocol.SerializeToString,
-            microcrud__pb2.ResultService.FromString,
+            '/microcrud.CrudService/GetItemById',
+            crud__pb2.GetItemRequest.SerializeToString,
+            crud__pb2.GetByIdResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -243,7 +242,7 @@ class CrudEntity(object):
             _registered_method=True)
 
     @staticmethod
-    def GetData(request,
+    def GetItems(request,
             target,
             options=(),
             channel_credentials=None,
@@ -256,9 +255,9 @@ class CrudEntity(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/microcrud.CrudEntity/GetData',
-            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            microcrud__pb2.ResultService.FromString,
+            '/microcrud.CrudService/GetItems',
+            crud__pb2.GetItemsRequest.SerializeToString,
+            crud__pb2.GetItemsResponse.FromString,
             options,
             channel_credentials,
             insecure,
