@@ -24,45 +24,45 @@ stub = crud_pb2_grpc.CrudServiceStub(channel)
 
 
 
-@app.get("/{entity}/{id}")
-def getbyid(id:str , entity:str):
+@app.get("/{bucket}/{entity}/{id}")
+def getbyid(bucket:str, id:str , entity:str):
     
-    entity = crud_pb2.GetItemRequest(id=id ,entity=entity,Bucket= "ali")
+    entity = crud_pb2.GetItemRequest(id=id ,entity=entity,Bucket= bucket)
     response = stub.GetItemById(entity)
     print(response.data)
     return {"Ok":response.ok , "data": response.data}  
 
-@app.post("/{entity}")
-def create(entity:str, js:CrudBaseMode):
+@app.post("/{bucket}/{entity}")
+def create(bucket:str ,entity:str, js:CrudBaseMode):
     data_struct = struct_pb2.Struct()
     data_struct.update(js.data)
     print(data_struct)
-    data= crud_pb2.CreateItemRequest(entity= entity,data= data_struct,Bucket= "ali")
+    data= crud_pb2.CreateItemRequest(entity= entity,data= data_struct,Bucket= bucket)
     response= stub.CreateItem(data)
     
     return {"Ok":response.ok} 
 
 
-@app.put("/{entity}/{id}")
-def update(entity:str, id:str,js:CrudBaseMode):
+@app.put("/{bucket}/{entity}/{id}")
+def update(bucket:str, entity:str, id:str,js:CrudBaseMode):
     print(js)
     data_struct = struct_pb2.Struct()
     data_struct.update(js.data)
-    data= crud_pb2.UpdateItemRequest(id= id,entity= entity,data= data_struct,Bucket= "ali")
+    data= crud_pb2.UpdateItemRequest(id= id,entity= entity,data= data_struct,Bucket= bucket)
     response= stub.UpdateItem(data)
     return {"Ok":response.ok} 
 
 
-@app.delete("/{entity}/{id}")
-def delete(entity:str, id:str):
-    data= crud_pb2.DeleteItemRequest(id= id,entity= entity)
+@app.delete("/{bucket}/{entity}/{id}")
+def delete(bucket:str , entity:str, id:str):
+    data= crud_pb2.DeleteItemRequest(id= id,entity= entity , Bucket=bucket)
     response= stub.DeleteItem(data)
     return {"Ok":response.ok} 
 
-@app.get("/{entity}/")
-async def getItems(entity:str,pageindex:int,pagesize:int):
+@app.get("/{bucket}/{entity}/")
+async def getItems(bucket:str, entity:str,pageindex:int,pagesize:int):
     print(pageindex ,pagesize)
-    data= crud_pb2.GetItemsRequest(entity=entity , pageIndex=pageindex ,pageSize= pagesize,Bucket= "ali")
+    data= crud_pb2.GetItemsRequest(entity=entity , pageIndex=pageindex ,pageSize= pagesize,Bucket= bucket)
     response= stub.GetItems(data)
     ls=[]
     for row in response.data:
