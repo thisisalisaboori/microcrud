@@ -19,7 +19,7 @@ class CrudBaseMode(BaseModel):
 
 app = FastAPI()
 
-channel = grpc.insecure_channel('localhost:50051')
+channel = grpc.insecure_channel('app-service:50051')
 stub = crud_pb2_grpc.CrudServiceStub(channel)
 
 

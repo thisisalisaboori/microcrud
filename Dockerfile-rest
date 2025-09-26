@@ -8,4 +8,4 @@ workdir /app
 RUN pip3 install --upgrade pip
 RUN pip3 install -r install.txt
 
-CMD uvicorn rest:app --host 127.0.0.1 --port 8080
+CMD uvicorn rest:app --host 0.0.0.0 --port 8080

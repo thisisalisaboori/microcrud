@@ -1,0 +1,34 @@
+version: '3.3'
+
+services:
+  couchbase:
+    container_name: couchbase
+    image: couchbase:latest
+
+    ports:
+      - 8091:8091
+      - 9123:9123
+      - 11210:11210 
+      - 8093:8093 
+      
+    volumes:
+      - ./couchbase/:/opt/couchbase/var
+    networks:
+     - crudnetwork
+      
+  rest:
+    container_name: rest-service
+    image: microcrud-rest:latest
+    ports:
+      - 8080:8080
+    networks:
+     - crudnetwork
+  grpc-appservice:
+    container_name: app-service
+    image: microcrud-app:latest
+    networks:
+     - crudnetwork
+
+networks:
+  crudnetwork:
+     external: true

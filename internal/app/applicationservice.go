@@ -18,13 +18,13 @@ type Server struct {
 	pb.UnimplementedCrudServiceServer
 }
 
-func Connect(bucketName string , collection string) (*gocb.Cluster, *gocb.Collection) {
+func Connect(bucketName string, collection string) (*gocb.Cluster, *gocb.Collection) {
 	c, err := ConnectCluster()
 	if err != nil {
 		log.Fatalf("Error connecting:  %v", err)
 	}
 
-	CreateBucket(c,bucketName)
+	CreateBucket(c, bucketName)
 
 	bucket := c.Bucket(bucketName)
 	if err := bucket.WaitUntilReady(15*time.Second, nil); err != nil {
@@ -44,13 +44,13 @@ func ConnectCluster() (*gocb.Cluster, error) {
 			Password: "11235813",
 		},
 	}
-	c, err := gocb.Connect("couchbase://127.0.0.1", opts)
+	c, err := gocb.Connect("couchbase://couchbase", opts)
 
 	return c, err
 
 }
 
-func CreateBucket(c *gocb.Cluster  ,bucketName string ) error{
+func CreateBucket(c *gocb.Cluster, bucketName string) error {
 	bm := c.Buckets()
 	_, err := bm.GetBucket(bucketName, nil)
 	if err != nil {
@@ -67,7 +67,7 @@ func CreateBucket(c *gocb.Cluster  ,bucketName string ) error{
 		}
 
 	}
-	return  err
+	return err
 }
 func CreateCollection(bucket *gocb.Bucket, name string) {
 	cm := bucket.Collections()
@@ -104,21 +104,19 @@ func (s *Server) Init(ctx context.Context, request *pb.InitRequst) (*pb.BaseResp
 		}
 
 	}
-	
 
-	
 	return &pb.BaseResponse{Ok: true}, err
 
 }
 
 func (s *Server) CreateItem(ctx context.Context, request *pb.CreateItemRequest) (*pb.BaseResponse, error) {
-	fmt.Printf("create ....%s %s %v , ",request.Bucket, request.Entity, request.Data)
-	cluster, c := Connect(request.Bucket , request.Entity)
+	fmt.Printf("create ....%s %s %v , ", request.Bucket, request.Entity, request.Data)
+	cluster, c := Connect(request.Bucket, request.Entity)
 	defer cluster.Close(nil)
 	id := uuid.New()
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-	
+
 	data := request.Data.AsMap()
 	fmt.Println(data)
 	_, err := c.Insert(id.String(), data, &gocb.InsertOptions{Context: ctx})
@@ -131,7 +129,7 @@ func (s *Server) CreateItem(ctx context.Context, request *pb.CreateItemRequest) 
 
 func (s *Server) UpdateItem(ctx context.Context, request *pb.UpdateItemRequest) (*pb.BaseResponse, error) {
 	fmt.Println("update ....")
-	cluster, c := Connect(request.Bucket , request.Entity)
+	cluster, c := Connect(request.Bucket, request.Entity)
 	defer cluster.Close(nil)
 
 	id := request.Id
@@ -147,7 +145,7 @@ func (s *Server) UpdateItem(ctx context.Context, request *pb.UpdateItemRequest) 
 }
 
 func (s *Server) DeleteItem(ctx context.Context, request *pb.DeleteItemRequest) (*pb.BaseResponse, error) {
-	cluster, col := Connect(request.Bucket ,request.Entity)
+	cluster, col := Connect(request.Bucket, request.Entity)
 	defer cluster.Close(nil)
 	_, err := col.Remove(request.Id, &gocb.RemoveOptions{})
 	if err != nil {
@@ -157,7 +155,7 @@ func (s *Server) DeleteItem(ctx context.Context, request *pb.DeleteItemRequest) 
 }
 func (s *Server) GetItemById(ctx context.Context, request *pb.GetItemRequest) (*pb.GetByIdResponse, error) {
 	fmt.Println("get item by id ....")
-	cluster, c := Connect(request.Bucket ,request.Entity)
+	cluster, c := Connect(request.Bucket, request.Entity)
 	defer cluster.Close(nil)
 	q, err := c.Get(request.Id, nil)
 	if err != nil {
@@ -172,7 +170,7 @@ func (s *Server) GetItemById(ctx context.Context, request *pb.GetItemRequest) (*
 
 func (s *Server) GetItems(ctx context.Context, request *pb.GetItemsRequest) (*pb.GetItemsResponse, error) {
 	fmt.Println("get items....%s  %d %d", request.Entity, request.PageIndex, request.PageSize)
-	cluster, col := Connect(request.Bucket ,request.Entity)
+	cluster, col := Connect(request.Bucket, request.Entity)
 	defer cluster.Close(nil)
 	_, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
@@ -183,8 +181,8 @@ func (s *Server) GetItems(ctx context.Context, request *pb.GetItemsRequest) (*pb
 		request.PageIndex = 1
 	}
 	skip := (request.PageIndex - 1) * request.PageSize
-	q := fmt.Sprintf("SELECT  Meta().id,c.* FROM `%s`.%s.%s  c offset %d  LIMIT %d;",request.Bucket, 
-	 scope, colnmae, skip, request.PageSize)
+	q := fmt.Sprintf("SELECT  Meta().id,c.* FROM `%s`.%s.%s  c offset %d  LIMIT %d;", request.Bucket,
+		scope, colnmae, skip, request.PageSize)
 	fmt.Println(q)
 	result, q_err := cluster.Query(q, &gocb.QueryOptions{Adhoc: true})
 	if q_err != nil {
