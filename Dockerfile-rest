@@ -1,0 +1,11 @@
+from python:3.12-rc-alpine
+
+COPY ./api/endpoint/contracts/ /app/contracts/
+ADD ./api/endpoint/rest.py/ /app/rest.py
+ADD ./api/endpoint/install.pip/ /app/install.txt
+RUN tree /app
+workdir /app
+RUN pip3 install --upgrade pip
+RUN pip3 install -r install.txt
+
+CMD uvicorn rest:app --host 127.0.0.1 --port 8080

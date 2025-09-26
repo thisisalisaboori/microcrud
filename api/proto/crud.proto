@@ -1,0 +1,73 @@
+syntax= "proto3";
+
+import "google/protobuf/struct.proto";
+
+
+package microcrud;
+option go_package = "api/proto/microcrudproto;microcrudproto";
+
+
+
+service CrudService{
+    rpc CreateItem(CreateItemRequest) returns (BaseResponse);
+    rpc UpdateItem(UpdateItemRequest) returns (BaseResponse);
+    rpc DeleteItem(DeleteItemRequest) returns (BaseResponse);
+    rpc GetItemById(GetItemRequest) returns (GetByIdResponse);
+    rpc GetItems(GetItemsRequest) returns (GetItemsResponse) ;
+    rpc Init(InitRequst) returns (BaseResponse);
+}
+
+
+message BaseResponse{
+    bool ok =1;
+}
+
+message InitRequst{
+
+    string Bucket =1;
+    string Collection =2;
+    bool CreateIndex=3;
+}
+
+message GetByIdResponse{
+    bool ok =1;
+    google.protobuf.Struct data=2;
+}
+
+message GetItemsResponse{
+    bool ok =1;
+    repeated GetByIdResponse data=2;
+}
+
+
+message CreateItemRequest{
+    string Bucket =1;
+    string entity =2;
+    google.protobuf.Struct data=3;
+}
+
+message UpdateItemRequest{
+    string Bucket =1;
+    string id=2;
+    string entity =3;
+    google.protobuf.Struct data=4;
+}
+
+message DeleteItemRequest{
+     string Bucket =1;
+    string id=2;
+    string entity =3;
+}
+
+message GetItemRequest{
+     string Bucket =1;
+    string id=2;
+    string entity =3;
+}
+
+message GetItemsRequest{
+     string Bucket =1;
+    string entity =2;
+    int32 pageIndex=3;
+    int32 pageSize=4;
+}
