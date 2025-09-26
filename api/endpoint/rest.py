@@ -2,7 +2,7 @@ from typing import Union
 import sys,os
 import uvicorn
 
-sys.path.append('/media/ali/Project/ali/microcud/api/endpoint/contracts')
+sys.path.append('/app/contracts')
 
 import grpc
 from contracts import crud_pb2

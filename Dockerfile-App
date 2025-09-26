@@ -1,0 +1,20 @@
+from golang:tip-alpine AS build
+
+ADD go.mod /microcud/
+ADD go.sum /microcud/
+
+workdir /microcud
+
+COPY ./api/proto/microcrudproto/ /microcud/api/proto/microcrudproto/
+
+COPY ./cmd/server/ /microcud/cmd/server/
+COPY ./internal/app/ /microcud/internal/app/
+RUN go mod tidy && go mod download
+
+workdir /microcud/cmd/server
+RUN    go get . && go build -o /microcud/build/
+
+from  alpine:3.22
+copy --from=build /microcud/build/ /app/
+workdir /app
+CMD ./server
