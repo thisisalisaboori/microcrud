@@ -71,7 +71,6 @@ func CreateBucket(c *gocb.Cluster, bucketName string) error {
 }
 func CreateCollection(bucket *gocb.Bucket, name string) {
 	cm := bucket.Collections()
-	// ساخت Collection در Scope
 	_ = cm.CreateCollection(gocb.CollectionSpec{
 		ScopeName: "_default",
 		Name:      name,
